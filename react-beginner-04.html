@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  function App () {
+    const [counter, setCounter] = React.useState(0);
+    const onClick = () => {
+      // setCounter(counter + 1);
+      // state의 값을 변경하고 싶을 때는 함수를 이용한다.
+      // 어디선가 예상치 못한 업데이트가 일어난다 해도 혼동을 주지 않는다.
+      setCounter((current) => current + 1);
+    }
+    return (
+      <div>
+        <h3>Total clicks: {counter}</h3>
+        <button onClick={onClick}>click me</button>
+      </div>
+    )
+  }
+
+  const root = document.getElementById("root")
+  ReactDOM.render(<App />, root);
+</script>
+</html>

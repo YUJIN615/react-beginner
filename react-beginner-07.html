@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!-- props type 체크해주는 라이브러리 -->
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  function Btn({ text, big = false, changeValue }) {
+    // Btn 컴포넌트에 전달한 속성을 첫번째 인자인 props로 받아온다. objcet임
+    // props의 값을 바로 가져오려면 {} 로 감싼 후 속성의 key 값을 쓴다.
+    // String, Boolean, function 등 모든 type을 받아올 수 있다.
+    console.log(text, big, 'was rendered')
+    return (
+      <button
+        onClick={changeValue}
+        style={{
+          backgroundColor: "blue",
+          color: "white",
+          padding: "10px 20px",
+          border: 0,
+          borderRadius: 10,
+          fontSize: big ? 18 : 14 // props로 받아온 속성으로 style을 분기처리
+        }}>{text}</button>
+    )
+  }
+
+  // 컴포넌트에 전달되는 props 값이 변경될때만 리렌더링 될 수 있게 해줌
+  // 불필요한 리렌더링으로 인해 느려지는것을 방지
+  // React.memo(컴포넌트명)
+  const MemorizedBtn = React.memo(Btn);
+
+  // props의 type을 정해준다
+  console.log(PropTypes)
+  Btn.propTypes = {
+    text: PropTypes.string.isRequired,
+    big: PropTypes.bool,
+    changeValue: PropTypes.func
+  }
+  function App() {
+    const [value, setValue] = React.useState("Save Changes");
+    const changeValue = () => setValue("Revert changes")
+    return (
+      <div>
+        <Btn text={value} big={false} changeValue={changeValue} />
+        <Btn text="Continue" big={true} />
+      </div>
+    )
+  }
+
+  const root = document.getElementById("root")
+  ReactDOM.render(<App />, root);
+</script>
+</html>

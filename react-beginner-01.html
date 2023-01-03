@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const root = document.getElementById("root")
+  /*  const span = React.createElement(
+      'span',
+      { id: 'counter-area',
+        style: { color: 'blue', marginRight: 10 },
+        onMouseEnter: () => {
+          console.log('mouse enter')
+        }
+      },
+      'Count : 0');
+    const button = React.createElement(
+      'button',
+      { class: 'counter-button',
+        onClick: () => {
+          console.log('clicked')}
+      },
+      'Click Me');
+    const container = React.createElement('div', null, [span, button])
+    ReactDOM.render(container, root);*/
+
+  // 컴포넌트의 첫글자는 반드시 대문자여야 한다.
+  // 소문자로 작성하면 HTML 태그로 인식할 수 있음
+  // 변수명 = () => () 문법은 function 변수명 () { return } 과 같은 의미
+  const Title = () => (
+    <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Hello I'm title</h3>
+  )
+  const Button = () => (
+    <button className="counter-button" onClick={() => console.log("clicked")}>Click me</button>
+  )
+  const Container = () => (
+    <div>
+      <Title />
+      <Button />
+      <Button />
+      <Button />
+    </div>
+  );
+
+  ReactDOM.render(<Container />, root);
+</script>
+</html>
